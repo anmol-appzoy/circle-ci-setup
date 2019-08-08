@@ -1,48 +1,48 @@
 version: 2
 jobs:
-  node:
-    working_directory: ~/circle_ci_setup
-    docker:
-      - image: circleci/node:8
-    steps:
-      - checkout
+  # node:
+  #   working_directory: ~/circle_ci_setup
+  #   docker:
+  #     - image: circleci/node:8
+  #   steps:
+  #     - checkout
 
-      - restore_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+  #     - restore_cache:
+  #         key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
 
-      - restore_cache:
-          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+  #     - restore_cache:
+  #         key: node-v1-{{ checksum "package.json" }}-{{ arch }}
 
-      - run: yarn install
+  #     - run: yarn install
 
-      - save_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
-          paths:
-            - ~/.cache/yarn
+  #     - save_cache:
+  #         key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
+  #         paths:
+  #           - ~/.cache/yarn
 
-      - save_cache:
-          key: node-v1-{{ checksum "package.json" }}-{{ arch }}
-          paths:
-            - node_modules
+  #     - save_cache:
+  #         key: node-v1-{{ checksum "package.json" }}-{{ arch }}
+  #         paths:
+  #           - node_modules
 
-      - run:
-          name: jest tests
-          command: |
-            mkdir -p test-results/jest
-            yarn run test
-          environment:
-            JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
+  #     - run:
+  #         name: jest tests
+  #         command: |
+  #           mkdir -p test-results/jest
+  #           yarn run test
+  #         environment:
+  #           JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
 
-      - persist_to_workspace:
-          root: ~/circle_ci_setup
-          paths:
-            - node_modules
+  #     - persist_to_workspace:
+  #         root: ~/circle_ci_setup
+  #         paths:
+  #           - node_modules
 
-      - store_test_results:
-          path: test-results
+  #     - store_test_results:
+  #         path: test-results
 
-      - store_artifacts:
-          path: test-results
+  #     - store_artifacts:
+  #         path: test-results
 
   # android:
   #   working_directory: ~/demo-react-native/android
@@ -90,7 +90,7 @@ jobs:
 
       - run:
           name: set Ruby version
-          command:  echo "ruby-2.4" > ~/.ruby-version
+          command: echo "ruby-2.4" > ~/.ruby-version
 
       - restore_cache:
           key: yarn-v1-{{ checksum "yarn.lock" }}-{{ arch }}
@@ -130,7 +130,6 @@ jobs:
       # - run:
       #     command: bundle exec fastlane test
       #     working_directory: ios
-
       # - run:
       #     name: set up test results
       #     working_directory: ios
@@ -141,7 +140,6 @@ jobs:
       #       mv fastlane/test_output/report.junit test-results/xcode/junit.xml
       # - store_test_results:
       #     path: ios/test-results
-
       # - store_artifacts:
       #     path: ios/test-results
 
@@ -154,5 +152,5 @@ workflows:
       #     requires:
       #       - node
       - ios:
-          requires:
-            - node
+          # requires:
+          #   - node
