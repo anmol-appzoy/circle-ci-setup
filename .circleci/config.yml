@@ -147,10 +147,10 @@ workflows:
   version: 2
   node-android-ios:
     jobs:
-      - node
+      # - node
       # - android:
       #     requires:
       #       - node
-      - ios:
+      - ios
           # requires:
           #   - node
