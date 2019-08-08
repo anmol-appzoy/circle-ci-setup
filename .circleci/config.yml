@@ -124,6 +124,9 @@ jobs:
           paths:
             - vendor/bundle
 
+      - store_artifacts:
+          path: vendor/bundle
+
       # - run:
       #     command: bundle exec fastlane test
       #     working_directory: ios
